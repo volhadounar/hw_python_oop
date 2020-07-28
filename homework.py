@@ -22,8 +22,8 @@ class Calculator:
     def get_period_stats(self, delt_day):
         today = dt.date.today()
         date_before = today - dt.timedelta(days=delt_day)
-        return sum([item.amount for item in self.records
-                   if date_before < item.date <= today])
+        return sum(item.amount for item in self.records
+                   if date_before < item.date <= today)
 
     def get_today_stats(self):
         return self.get_period_stats(1)
@@ -51,23 +51,23 @@ class CashCalculator(Calculator):
     def get_today_cash_remained(self, currency):
         sum_remained = self.get_remained_sum()
 
-        if (sum_remained == 0):
-            return('Денег нет, держись')
+        if sum_remained == 0:
+            return 'Денег нет, держись'
 
         currency_dict = {
-            'usd': [self.USD_RATE, 'USD'],
-            'eur': [self.EURO_RATE, 'Euro'],
-            'rub': [1, 'руб']
+            'usd': (self.USD_RATE, 'USD'),
+            'eur': (self.EURO_RATE, 'Euro'),
+            'rub': (1, 'руб')
         }
 
-        str_currency = currency_dict[currency][1]
+        f_rate, str_currency = currency_dict[currency]
         if sum_remained > 0:
-            result_sum = sum_remained/currency_dict[currency][0]
-            return(f'На сегодня осталось {result_sum:.2f} '
-                   f'{str_currency}')
-        res = abs(sum_remained)/currency_dict[currency][0]
-        return(f'Денег нет, держись: твой долг - {res:.2f} '
-               f'{str_currency}')
+            result_sum = sum_remained/f_rate
+            return (f'На сегодня осталось {result_sum:.2f} '
+                    f'{str_currency}')
+        res = abs(sum_remained)/f_rate
+        return (f'Денег нет, держись: твой долг - {res:.2f} '
+                f'{str_currency}')
 
 
 def main():
@@ -94,7 +94,7 @@ def main():
     print(date_before)
     print(dt.date.today().day)
     print('Here\'s a single-quote escape')
-    print('This is an "escape" of a double-quote')
+    print("This is an 'escape' of a double-quote")
 
 
 if __name__ == '__main__':
