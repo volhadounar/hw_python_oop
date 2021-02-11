@@ -62,26 +62,21 @@ class CashCalculator(Calculator):
 
         f_rate, str_currency = currency_dict[currency]
         if sum_remained > 0:
-            result_sum = sum_remained/f_rate
+            result_sum = sum_remained / f_rate
             return (f'На сегодня осталось {result_sum:.2f} '
                     f'{str_currency}')
-        res = abs(sum_remained)/f_rate
+        res = abs(sum_remained) / f_rate
         return (f'Денег нет, держись: твой долг - {res:.2f} '
                 f'{str_currency}')
 
 
 def main():
-    # создадим калькулятор денег с дневным лимитом 1000
     cash_calculator = CashCalculator(1000)
     cash_calculator.add_record(Record(amount=145, comment='кофе'))
-    # и к этой записи тоже дата должна добавиться автоматически
     cash_calculator.add_record(Record(amount=300, comment='Серёге за обед'))
-    # а тут пользователь указал дату, сохраняем её
     cash_calculator.add_record(
         Record(amount=3000, comment='бар в Танин др', date='08.11.2019'))
     print(cash_calculator.get_today_cash_remained('rub'))
-    # должно напечататься
-    # На сегодня осталось 555 руб
     cal_calculator = CaloriesCalculator(100)
     cal_calculator.add_record(
         Record(amount=20, comment='кофе', date='20.07.2020'))
