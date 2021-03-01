@@ -1,7 +1,7 @@
 Money and calories calculator
 =================================
 
-This project is meant to pracice Python3 and Python Classes and Inheritance.
+This project is meant to practice Python3 and Python Classes and Inheritance.
 
 Getting Started
 ===============
